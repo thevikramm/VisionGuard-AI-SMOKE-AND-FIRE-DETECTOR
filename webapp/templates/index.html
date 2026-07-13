@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EMBERWATCH — Fire &amp; Smoke Sentry</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body data-dur-fire="{{ dur_fire }}" data-dur-smoke="{{ dur_smoke }}">
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">◎</span>
+    <div>
+      <div class="brand-name">EMBERWATCH</div>
+      <div class="brand-sub">Fire &amp; Smoke Sentry — Cam {{ camera_index }}</div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <div class="pill" id="camPill"><span class="dot" id="camDot"></span><span id="camText">Connecting…</span></div>
+    <div class="clock" id="clock">--:--:--</div>
+  </div>
+</header>
+
+<main class="layout">
+
+  <section class="video-panel">
+    <div class="video-frame">
+      <span class="bracket tl"></span><span class="bracket tr"></span>
+      <span class="bracket bl"></span><span class="bracket br"></span>
+      <img id="videoFeed" src="/video_feed" alt="Live camera feed">
+      <div class="video-caption">LIVE — model conf ≥ 0.50, class-gated below</div>
+    </div>
+  </section>
+
+  <aside class="gauges">
+
+    <div class="gauge-card" id="fireCard">
+      <div class="gauge-head">
+        <span class="gauge-label">FIRE</span>
+        <span class="gauge-state" id="fireState">CLEAR</span>
+      </div>
+      <div class="gauge-ring-wrap">
+        <svg viewBox="0 0 120 120" class="gauge-ring">
+          <circle cx="60" cy="60" r="52" class="ring-track"></circle>
+          <circle cx="60" cy="60" r="52" class="ring-fill" id="fireRing"></circle>
+        </svg>
+        <div class="gauge-center">
+          <div class="gauge-time" id="fireTime">0.0s</div>
+          <div class="gauge-threshold">/ {{ dur_fire }}s fuse</div>
+        </div>
+      </div>
+      <div class="gauge-meta">
+        <div>confidence <span id="fireConf">0.00</span></div>
+        <div>gate &gt; {{ conf_fire }}</div>
+      </div>
+    </div>
+
+    <div class="gauge-card" id="smokeCard">
+      <div class="gauge-head">
+        <span class="gauge-label">SMOKE</span>
+        <span class="gauge-state" id="smokeState">CLEAR</span>
+      </div>
+      <div class="gauge-ring-wrap">
+        <svg viewBox="0 0 120 120" class="gauge-ring">
+          <circle cx="60" cy="60" r="52" class="ring-track"></circle>
+          <circle cx="60" cy="60" r="52" class="ring-fill ring-fill--smoke" id="smokeRing"></circle>
+        </svg>
+        <div class="gauge-center">
+          <div class="gauge-time" id="smokeTime">0.0s</div>
+          <div class="gauge-threshold">/ {{ dur_smoke }}s fuse</div>
+        </div>
+      </div>
+      <div class="gauge-meta">
+        <div>confidence <span id="smokeConf">0.00</span></div>
+        <div>gate &gt; {{ conf_smoke }}</div>
+      </div>
+    </div>
+
+  </aside>
+
+  <section class="log-panel">
+    <div class="log-head">
+      <span>EVENT LOG</span>
+      <span class="log-count" id="logCount">0 events</span>
+    </div>
+    <div class="log-list" id="logList">
+      <div class="log-empty">No confirmed events yet. An entry appears here once fire or smoke clears its persistence fuse.</div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="specstrip">
+  <div><span>MODEL</span>optimized150.pt · YOLOv8 · 640px</div>
+  <div><span>FIRE GATE</span>conf &gt; {{ conf_fire }} · {{ dur_fire }}s persist</div>
+  <div><span>SMOKE GATE</span>conf &gt; {{ conf_smoke }} · {{ dur_smoke }}s persist</div>
+  <div><span>EMAIL ALERTS</span>{{ "ENABLED" if email_enabled else "DISABLED" }}</div>
+</footer>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
