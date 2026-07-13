@@ -50,19 +50,7 @@ Fire and Smoke Detection is a computer-vision system that watches a live camera 
 
 ---
 
-## Screenshots / Demo
 
->  *Add your own screenshots and demo GIFs here — none are currently included in the repository.*
-
-| Live Detection Window | Fire Alert Screenshot | Smoke Alert Screenshot |
-|---|---|---|
-| `docs/demo_live.gif` | `docs/fire_detected_example.jpg` | `docs/smoke_detected_example.jpg` |
-
-```
-[ Placeholder: screen recording of YOLOv8LiveCam.py running, showing bounding boxes on a test fire/smoke source ]
-```
-
----
 
 ## Tech Stack
 
