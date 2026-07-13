@@ -198,8 +198,7 @@ By default this runs inference on `test_pics/mumlar2.png` and saves the annotate
 | **Classes** | `0`: fire, `1`: smoke (inferred from `class_index` handling in the detection scripts) |
 | **Input size** | 640×640 (`imgsz=640`) |
 | **Base inference confidence** | `0.5` (further filtered per-class after inference) |
-| **Dataset / Training details** | Not included in this repository — no training scripts, dataset, or training configuration are present. If you trained this model yourself, consider documenting the dataset source, number of epochs, and augmentation strategy here. |
-| **Performance / Benchmarks** | Not available in the repository. No accuracy, mAP, precision/recall, or FPS benchmarks are included — run your own evaluation on your target hardware and data before relying on this in production. |
+
 
 ---
 
@@ -242,16 +241,6 @@ pygame.mixer.music.load('alert_sound.mp3')
 >  **Security note:** Credentials are currently hardcoded directly in `YOLOv8LiveCam.py`. Before committing changes or sharing your copy of this project, move these to environment variables or a `.env` file (e.g. using `python-dotenv`) instead of leaving them in source code.
 
 ---
-
-## Results
-
->  *No result images, logs, or metrics are currently included in the repository. Add sample outputs here once available — for example:*
-
-```
-[ Placeholder: annotated screenshot showing a correctly boxed fire event ]
-[ Placeholder: annotated screenshot showing a correctly boxed smoke event ]
-[ Placeholder: console output / log snippet showing an alert being triggered ]
-```
 
 ---
 
